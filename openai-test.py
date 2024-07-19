@@ -9,14 +9,13 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Load OpenAI API key from .env file
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json
     response = openai.Completion.create(
-        model="text-davinci-003",
+        engine="text-davinci-003",
         prompt=data['messages'],
         max_tokens=150
     )
