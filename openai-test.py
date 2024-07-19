@@ -19,7 +19,7 @@ def chat():
         model="gpt-4",
         messages=data['messages']
     )
-    return jsonify(response['choices'][0]['message'])
+    return jsonify(response.choices[0].message)
 
 @app.route('/api/generate-image', methods=['POST'])
 def generate_image():
@@ -29,7 +29,7 @@ def generate_image():
         n=1,
         size="1024x1024"
     )
-    return jsonify({'image_url': response['data'][0]['url']})
+    return jsonify({'image_url': response.data[0].url})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
