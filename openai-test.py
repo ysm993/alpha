@@ -20,7 +20,7 @@ def chat():
         prompt=data['messages'],
         max_tokens=150
     )
-    return jsonify(response.choices[0].text)
+    return jsonify({'response': response.choices[0].text.strip()})
 
 @app.route('/api/generate-image', methods=['POST'])
 def generate_image():
@@ -30,7 +30,7 @@ def generate_image():
         n=1,
         size="1024x1024"
     )
-    return jsonify({'image_url': response.data[0].url})
+    return jsonify({'image_url': response['data'][0]['url']})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
