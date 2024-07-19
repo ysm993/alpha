@@ -359,4 +359,25 @@ async function updateAIImage(response) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const userInput = document.querySelector('input[name="userInput"]').value;
+
+    fetch("https://your-api-endpoint.com/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: [{ role: "user", content: userInput }],
+      }),
+      mode: "cors", // CORS 모드를 설정합니다.
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error:", error));
+  });
+});
+
 updateAlignmentDisplay();
