@@ -119,14 +119,16 @@ function checkInventory(item) {
 }
 
 async function converseWithGPT(messages) {
-  const response = await fetch("https://your-api-endpoint.com/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ messages: messages }),
-    mode: "cors", // Add this line
-  });
+  const response = await fetch(
+    "https://alphatest-712dd7311f06.herokuapp.com/api/chat",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages: messages }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
