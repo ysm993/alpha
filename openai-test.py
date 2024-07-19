@@ -5,22 +5,28 @@ import openai
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-openai.api_key = 'YOUR_API_KEY'
+openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.get_json()
-    if not data or 'message' not in data:
-        return jsonify({"error": "No message provided"}), 400
-    
+    messages = data.get("messages")
     response = openai.ChatCompletion.create(
-        model="gpt-4",  # 최고 성능의 모델 사용
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": data['message']}
-        ]
+        model="gpt-4",
+        messages=messages
     )
-    return jsonify(response)
+    return jsonify(response['choices'][0]['message'])
+
+@app.route('/api/generate-image', methods=['POST'])
+def generate_image():
+    data = request.get_json()
+    prompt = data.get("prompt")
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="1024x1024"
+    )
+    return jsonify({'image_url': response['data'][0]['url']})
 
 @app.after_request
 def add_cors_headers(response):
@@ -29,5 +35,5 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
     return response
 
-if __name__ == '__main__':
-    app.run(debug=False, port=5000)
+if __name__ == "__main__":
+    app.run()
