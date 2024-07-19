@@ -119,13 +119,16 @@ function checkInventory(item) {
 }
 
 async function converseWithGPT(messages) {
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ messages: messages }),
-  });
+  const response = await fetch(
+    "https://your-heroku-app.herokuapp.com/api/chat",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages: messages }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -133,13 +136,16 @@ async function converseWithGPT(messages) {
 }
 
 async function generateImage(prompt) {
-  const response = await fetch("/api/generate-image", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prompt: prompt }),
-  });
+  const response = await fetch(
+    "https://your-heroku-app.herokuapp.com/api/generate-image",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: prompt }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -231,17 +237,18 @@ async function handleUserInput(userInputValue) {
       itemCheckResult = checkInventory(item);
     }
 
-    const data = await converseWithWebSim(
-      JSON.stringify({
-        message:
+    const data = await converseWithGPT([
+      {
+        role: "user",
+        content:
           userInputValue +
           "\n\n이 메시지가 대화에 영향을 미치지 않도록 해주세요. 정보 상자 편집을 대화에 표시하지 마세요. 모든 퀘스트를 업데이트하고 완료된 퀘스트를 목록 맨 아래로 이동해 주세요. 모든 알려진 위치를 최신 상태로 유지해 주세요. 알려진 NPC 목록에 각 NPC를 만난 방법, 플레이어에 대한 느낌, 그리고 있다면 거래나 합의 등을 최신 상태로 유지해 주세요. 플레이어가 중요한 정보를 알게 되거나 무언가를 죽이면 경험치를 추가해 주세요.",
         context: "AD&IM 판타지 RPG 설정",
         characterInfo: characterInfo,
         skillCheckResult: skillCheckResult,
         itemCheckResult: itemCheckResult,
-      })
-    );
+      },
+    ]);
 
     chatMessages.removeChild(loadingMessage);
 
