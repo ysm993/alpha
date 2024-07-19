@@ -120,7 +120,7 @@ function checkInventory(item) {
 
 async function converseWithGPT(messages) {
   const response = await fetch(
-    "https://your-heroku-app.herokuapp.com/api/chat",
+    "https://https://owlowl2-5d8279645bd6.herokuapp.com/api/chat",
     {
       method: "POST",
       headers: {
@@ -137,7 +137,7 @@ async function converseWithGPT(messages) {
 
 async function generateImage(prompt) {
   const response = await fetch(
-    "https://your-heroku-app.herokuapp.com/api/generate-image",
+    "https://https://owlowl2-5d8279645bd6.herokuapp.com/api/generate-image",
     {
       method: "POST",
       headers: {
