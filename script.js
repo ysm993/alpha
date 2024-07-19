@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     const userInput = document.querySelector('input[name="userInput"]').value;
 
-    fetch("https://your-api-endpoint.com/api/chat", {
+    fetch("https://alphatest-712dd7311f06.herokuapp.com/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
