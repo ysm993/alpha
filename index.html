@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="nameInputModal">
+      <div class="modal-content">
+        <h2>캐릭터 이름 입력</h2>
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="당신의 캐릭터 이름은..."
+        />
+        <button id="submitName">확인</button>
+      </div>
+    </div>
+    <div class="game-container">
+      <div class="sidebar">
+        <div class="character-info">
+          <h2>캐릭터 정보</h2>
+          <div id="characterName"></div>
+          <div id="characterRace"></div>
+          <div id="characterClass"></div>
+          <h2>체력</h2>
+          <div class="health-container">
+            <input
+              type="number"
+              id="charCurrentHP"
+              class="readonly"
+              value="10"
+              placeholder="현재 HP"
+              readonly=""
+            />
+            <span>/</span>
+            <input
+              type="number"
+              id="charMaxHP"
+              class="readonly"
+              value="10"
+              placeholder="최대 HP"
+              readonly=""
+            />
+          </div>
+          <h2>레벨 &amp; 경험치</h2>
+          <input
+            type="number"
+            id="charLevel"
+            class="readonly"
+            value="1"
+            placeholder="레벨"
+            readonly=""
+          />
+          <div class="xp-container">
+            <input
+              type="number"
+              id="charXP"
+              class="readonly"
+              value="0"
+              placeholder="경험치"
+              readonly=""
+            />
+            <span>/</span>
+            <input
+              type="number"
+              id="charMaxXP"
+              class="readonly"
+              value="300"
+              placeholder="최대 경험치"
+              readonly=""
+            />
+          </div>
+          <h2>성향</h2>
+          <div class="alignment-container">
+            <div class="alignment-label">
+              <span>악</span>
+              <span>중립</span>
+              <span>선</span>
+            </div>
+            <input
+              type="range"
+              id="goodEvilSlider"
+              class="alignment-slider"
+              min="-100"
+              max="100"
+              value="0"
+              disabled=""
+            />
+            <div class="alignment-value" id="goodEvilValue">중립 (0)</div>
+            <div class="alignment-label">
+              <span>질서</span>
+              <span>중립</span>
+              <span>혼돈</span>
+            </div>
+            <input
+              type="range"
+              id="lawChaosSlider"
+              class="alignment-slider"
+              min="-100"
+              max="100"
+              value="0"
+              disabled=""
+            />
+            <div class="alignment-value" id="lawChaosValue">완전 중립 (0)</div>
+          </div>
+        </div>
+        <h2>능력치</h2>
+        <ul id="statsList">
+          <li class="stat">
+            <span>힘:</span>
+            <input
+              type="number"
+              id="charStrength"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+          <li class="stat">
+            <span>민첩:</span>
+            <input
+              type="number"
+              id="charDexterity"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+          <li class="stat">
+            <span>체질:</span>
+            <input
+              type="number"
+              id="charConstitution"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+          <li class="stat">
+            <span>지능:</span>
+            <input
+              type="number"
+              id="charIntelligence"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+          <li class="stat">
+            <span>지혜:</span>
+            <input
+              type="number"
+              id="charWisdom"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+          <li class="stat">
+            <span>매력:</span>
+            <input
+              type="number"
+              id="charCharisma"
+              class="stat-input"
+              value="8"
+              readonly=""
+            />
+          </li>
+        </ul>
+        <h2>방어 등급</h2>
+        <input
+          type="number"
+          id="charArmorClass"
+          class="readonly"
+          value="10"
+          placeholder="방어 등급"
+          readonly=""
+        />
+      </div>
+      <div class="main-content">
+        <div class="chat-log" id="chatLog">
+          <div
+            id="aiImageContainer"
+            style="
+              text-align: center;
+              margin-bottom: 20px;
+              height: 800px;
+              width: 1846px;
+              overflow: hidden;
+            "
+          >
+            <img
+              id="aiGeneratedImage"
+              alt="현재 상황을 묘사하는 AI 생성 이미지"
+              src="https://image.lexica.art/full_jpg/6c27a84d-9305-43d6-9686-6e5ddc5b2ec5"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+              "
+            />
+          </div>
+          <div
+            class="chat-messages"
+            id="chatMessages"
+            style="
+              flex: 1;
+              height: calc(20% - 140px);
+              overflow-y: auto;
+              border-top: 2px solid #00ffff;
+              padding-top: 20px;
+              margin-top: 30px;
+            "
+          ></div>
+        </div>
+        <form id="chatForm" class="chat-input">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="행동을 설명하거나 DM에게 질문하세요..."
+            required=""
+          />
+          <button type="submit">전송</button>
+        </form>
+      </div>
+      <div class="sidebar">
+        <h2>인벤토리</h2>
+        <div id="inventoryList" class="readonly"></div>
+        <h2>장비</h2>
+        <div id="equipmentList" class="readonly"></div>
+        <h2>주문 &amp; 능력</h2>
+        <div id="spellsList" class="readonly"></div>
+        <h2>현재 위치 &amp; 주변 환경</h2>
+        <div id="currentLocationList" class="readonly"></div>
+        <h2>보이는 존재들</h2>
+        <div id="visibleHostilesList" class="readonly"></div>
+        <h2>퀘스트</h2>
+        <div id="questsList" class="readonly"></div>
+        <h2>알고 있는 NPC</h2>
+        <div id="npcList" class="readonly"></div>
+        <h2>알고 있는 장소</h2>
+        <div id="locationsList" class="readonly"></div>
+      </div>
+    </div>
+  </body>
+</html>

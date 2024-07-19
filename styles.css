@@ -1,0 +1,234 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000000;
+  color: #00ffff;
+}
+.game-container {
+  display: flex;
+  height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background-color: #000000;
+  padding: 20px;
+  overflow-y: auto;
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #000000;
+}
+.chat-log {
+  flex: 1;
+  background-color: rgba(0, 255, 255, 0.05);
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 0;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1) inset;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #00ffff;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+.chat-message {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  padding: 10px;
+  border-radius: 0;
+  background-color: rgba(0, 255, 255, 0.05);
+  border: 1px solid #00ffff;
+}
+.player-message {
+  color: #00ffff;
+  border-left: 3px solid #00ffff;
+}
+.dm-message {
+  color: #00ffff;
+  border-left: 3px solid #00ffff;
+}
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  background-color: rgba(0, 255, 255, 0.05);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 0;
+}
+.chat-input button {
+  padding: 10px 20px;
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.chat-input button:hover {
+  background-color: rgba(0, 255, 255, 0.2);
+}
+.loading {
+  text-align: center;
+  color: #00ffff;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+.loading-bar {
+  width: 80%;
+  height: 20px;
+  background-color: #000000;
+  border: 1px solid #00ffff;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.loading-progress {
+  width: 0%;
+  height: 100%;
+  background-color: #00ffff;
+  transition: width 0.5s ease;
+}
+h2 {
+  color: #00ffff;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 5px;
+  margin-top: 0;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 5px;
+}
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.character-info {
+  background-color: rgba(0, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 0;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  border: 1px solid #00ffff;
+}
+.readonly {
+  background-color: rgba(0, 255, 255, 0.05);
+  color: #00ffff;
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 0;
+  border: 1px solid #00ffff;
+  pointer-events: none;
+}
+.stat-input {
+  width: 160px;
+  text-align: center;
+  background-color: rgba(0, 255, 255, 0.05);
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #00ffff;
+  }
+  50% {
+    box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 5px #00ffff;
+  }
+}
+.sidebar,
+.main-content,
+.chat-log,
+.character-info {
+  animation: glow 4s infinite;
+}
+.alignment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+.alignment-slider {
+  width: 100%;
+  margin: 5px 0;
+  pointer-events: none;
+}
+.alignment-label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.alignment-value {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+#nameInputModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-content {
+  background-color: #000000;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #00ffff;
+  width: 250px;
+  border-radius: 0;
+  text-align: center;
+}
+#nameInput {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: rgba(0, 255, 255, 0.05);
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 0;
+}
+#submitName {
+  padding: 10px 20px;
+  background-color: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#submitName:hover {
+  background-color: rgba(0, 255, 255, 0.2);
+}
