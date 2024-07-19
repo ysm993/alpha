@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # CORS 설정 추가
+CORS(app, resources={r"/*": {"origins": "*"}})  # CORS 설정 추가
 
 # Load OpenAI API key from .env file
 openai.api_key = os.getenv("OPENAI_API_KEY")
